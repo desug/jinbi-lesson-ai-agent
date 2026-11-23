@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 import httpx
 
-EXPECTED_SHA256 = 'b248e5c48e72e98b820c64ff326cef7ce299bf17643f91f61c3f521e88d73d41'
+EXPECTED_SHA256 = '9127398923ca1b671620a264b15a919528b5d627de859188f7d3e20bbf46a4e3'
 FIELDS = ('document_id','version','title','category','class_type','effective_date','text','supersedes_id')
 
 
