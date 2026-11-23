@@ -89,8 +89,15 @@ python tests/run_release_http_smoke.py
 ## 演示素材
 
 - 已上线小程序截图：`docs/media/mini-program/`（待补充）
-- AI 助手首页：`docs/media/agent-home/`（待补充）
-- 多轮课时查询：`docs/media/multiturn-hours/`（待补充）
+以下截图来自使用虚构数据的确定性离线演示，不代表真实大模型推理。
+
+**AI 助手首页**
+
+![AI 课时助手离线演示首页](docs/media/agent-home.png)
+
+**课时查询结果**
+
+![虚构学员课时只读查询结果](docs/media/lesson-query.png)
 - RAG 规则问答：`docs/media/rag-answer/`（待补充）
 - 工具调用流程图、技术架构图：见 [架构文档](docs/architecture.md) 与 [Agent 流程](docs/agent-workflow.md)
 - 项目演示视频：待补充链接
