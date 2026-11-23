@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN" data-demo-mode="offline_deterministic"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jinbi 课时助手 · 离线演示</title>
+<style>
+:root{
+--brand:#153F35;--primary:#226B58;--bg:#F6F8F5;--surface:#FFF;--text:#20352E;--muted:#63736A;--subtle:#738179;--gold:#C59A52;--line:#E6ECE7;--soft:#EDF3EE;--warning:#865A22;--warning-bg:#FAF6ED;--warning-line:#E8D8BA;--focus:#226B5840;
+--r-sm:8px;--r-md:12px;--r-lg:18px;--r-pill:999px;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:20px;--s6:24px;--s8:32px;--shadow:0 4px 24px #153f3506;--motion:180ms ease;
+font-family:"Segoe UI","Microsoft YaHei UI","Microsoft YaHei",system-ui,sans-serif;font-size:14px;color:var(--text);background:var(--bg)}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;height:100vh;height:100dvh;overflow:hidden}button,input,textarea{font:inherit}button{cursor:pointer;color:inherit;transition:background var(--motion),border-color var(--motion),color var(--motion)}button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}input:focus-visible,textarea:focus-visible{outline:2px solid var(--primary);outline-offset:2px}svg{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.topbar{height:76px;border-bottom:1px solid var(--line);background:var(--surface);padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:38px;height:40px;display:grid;place-items:center;border-radius:11px;background:var(--brand);color:var(--surface);position:relative;font:600 28px Georgia,serif}.brand-mark::after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);top:8px;right:8px}.brand-name{font-size:17px;letter-spacing:.05em;font-weight:700}.brand-name span{color:var(--subtle);font-weight:400;margin:0 6px}.brand-subtitle{color:var(--muted);font-size:10px;letter-spacing:.09em;margin-top:4px}.top-status{display:flex;align-items:center;gap:20px;font-size:12px;color:var(--muted)}.mode{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--r-pill);background:var(--soft);color:var(--brand);font-size:11px}.status-dot{width:6px;height:6px;background:var(--primary);border-radius:50%;display:inline-block;flex-shrink:0}.account-state{display:flex;align-items:center;gap:8px}.account-state svg{width:16px;height:16px}
+.shell{display:grid;grid-template-columns:252px minmax(0,1fr);height:calc(100% - 76px)}.sidebar{border-right:1px solid var(--line);padding:24px 20px;display:flex;flex-direction:column;gap:24px;overflow:auto}.eyebrow{font-size:10px;letter-spacing:.13em;color:var(--muted);font-weight:600;margin:0 0 12px}.sidebar h1{font-size:22px;margin:0 0 8px;line-height:1.5;letter-spacing:-.03em}.sidebar p{font-size:12px;line-height:1.85;margin:0;color:var(--muted)}.login label{display:block;font-size:12px;font-weight:600;margin:18px 0 8px}.login input{width:100%;min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);color:var(--text)}.primary{border:1px solid transparent;border-radius:var(--r-sm);color:var(--surface);background:var(--primary);min-height:42px;padding:10px 16px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px}.primary:hover:not(:disabled){background:var(--brand)}.login .primary{width:100%;margin-top:20px}.state{min-height:18px;font-size:11px!important;margin-top:12px!important}.state.error{color:var(--warning)}.credentials{border-top:1px solid var(--line);padding-top:16px;margin-top:16px}.credentials code{font:11px Consolas,monospace;color:var(--brand)}.nav-button{display:flex;align-items:center;gap:12px;min-height:44px;padding:10px 12px;width:100%;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);font-size:12px;text-align:left}.nav-button:hover:not(:disabled){border-color:var(--primary);background:var(--soft)}.new-chat{margin-bottom:24px}.active-nav{background:var(--soft);border-color:transparent;color:var(--brand);font-weight:600}.nav-caption{font-size:10px;color:var(--muted);margin:22px 0 10px;letter-spacing:.06em}.guide{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.8}.guide summary{cursor:pointer;min-height:32px;display:flex;align-items:center;gap:10px;color:var(--text)}.guide ol{padding-left:19px}.identity{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:20px;margin-top:24px}.identity-avatar{height:32px;width:32px;display:grid;place-items:center;border-radius:50%;background:var(--soft);color:var(--brand);font-size:11px}.identity strong{font-size:12px;display:block;overflow-wrap:anywhere}.identity small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.safety{margin-top:auto;padding:20px 0 0}.safety-title{display:flex;align-items:center;gap:8px;color:var(--brand);font-size:11px;margin-bottom:8px}.safety-title svg{width:16px;height:16px}.sidebar .mode-note{font-size:10px;margin-top:12px}
+.workspace{padding:24px;min-width:0;min-height:0}.chat{height:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;overflow:hidden}.chat-head{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none}.chat-heading{display:flex;align-items:center;gap:12px}.heading-icon{color:var(--primary);background:var(--soft);padding:10px;border-radius:var(--r-md);display:grid;place-items:center}.chat-head h2{margin:0;font-size:17px;font-weight:650}.chat-head p{margin:5px 0 0;font-size:11px;color:var(--muted)}.session{color:var(--muted);font-size:11px;display:flex;align-items:center;gap:8px;flex-shrink:0}.messages{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding:32px clamp(24px,4vw,72px)}
+.message{max-width:820px;margin:0 0 36px;display:flex;align-items:flex-start;gap:12px;animation:appear 180ms ease;overflow-wrap:anywhere}.message.user{margin-left:auto;justify-content:flex-end;max-width:72%}.message-content{min-width:0;flex:1}.message-avatar{width:28px;height:28px;border-radius:var(--r-sm);background:var(--brand);color:var(--surface);font:600 21px Georgia,serif;display:grid;place-items:center;flex:none}.role{font-size:14px;color:var(--muted);margin:0 0 9px;line-height:1.5}.user .role{text-align:right}.bubble{font-size:19px;white-space:pre-wrap;line-height:1.7}.user .bubble{font-size:18px;width:fit-content;margin-left:auto;border:1px solid var(--line);background:var(--soft);padding:10px 17px;border-radius:14px 14px 3px 14px}.structured{margin-top:16px;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}.card-label{font-size:14px;color:var(--muted);letter-spacing:.04em;display:flex;gap:8px;align-items:center}.card-title{font-size:17px;font-weight:600;margin:0 0 8px}.candidates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.candidate{padding:16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);text-align:left;display:flex;flex-direction:column;gap:8px;min-width:0}.candidate:hover:not(:disabled){border-color:var(--primary);background:var(--bg)}.candidate[aria-pressed=true]{border-color:var(--primary);background:var(--soft)}.candidate strong{font-size:16px}.candidate small{font-size:14px;color:var(--muted)}.candidate-action{font-size:14px;color:var(--primary);margin-top:4px}.hours-card{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;background:var(--bg)}.hours-card .card-title{margin:8px 0}.hours-detail{font-size:14px;color:var(--muted);line-height:1.8}.hours-value{text-align:right;flex:none}.hours-value strong{font-size:40px;font-weight:550;letter-spacing:-.06em;color:var(--brand);line-height:1.2;font-variant-numeric:tabular-nums}.hours-value span{margin-left:6px;color:var(--primary);font-size:12px}.hours-value small{display:block;margin-top:5px;color:var(--muted);font-size:14px}.callout{padding:16px 20px;border-color:var(--warning-line);background:var(--warning-bg);color:var(--warning)}.callout .card-title{font-size:17px}.sources{padding:20px;border:1px solid var(--line);border-radius:var(--r-md);margin-top:12px;background:var(--surface)}.sources summary{cursor:pointer;font-size:15px;font-weight:600;line-height:1.7}.source-entry{margin-top:12px}.source-entry + .source-entry{padding-top:12px;border-top:1px solid var(--line)}.source-excerpt{font-size:17px;line-height:1.7;white-space:pre-wrap;margin:0}.retrieval-label{margin-top:16px;color:var(--primary);font-size:14px}.diagnostics{font-size:10px;color:var(--muted);margin-top:12px;line-height:1.8}.diagnostics summary{cursor:pointer}.pending{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;min-height:30px}.spinner{width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite}
+.compose-area{padding:12px clamp(24px,4vw,72px) 18px;background:var(--surface);flex:none}.compose{border:1px solid var(--line);border-radius:14px;padding:14px 16px 10px;box-shadow:var(--shadow)}.compose:focus-within{border-color:var(--primary);box-shadow:0 0 0 2px var(--focus)}.compose textarea{width:100%;resize:none;min-height:42px;max-height:120px;padding:2px 0 6px;border:0;background:transparent;color:var(--text);line-height:1.7;font-size:16px}.compose textarea:focus-visible{outline:0}textarea::placeholder{color:var(--subtle)}.compose-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}.keyboard-hint{color:var(--muted);font-size:10px}.compose .primary{min-height:36px;font-size:12px;padding:8px 14px}.compose-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:10px;margin-top:10px}.jump{position:absolute;right:32px;bottom:190px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);padding:9px 14px;font-size:11px;box-shadow:var(--shadow)}.sidebar-shade,.mobile-toggle{display:none}@keyframes appear{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}@keyframes spin{to{transform:rotate(360deg)}}
+@media(min-width:1600px){.workspace{padding:32px}.chat-head{padding:24px 32px}.messages,.compose-area{padding-left:clamp(48px,6vw,120px);padding-right:clamp(48px,6vw,120px)}}
+@media(max-height:820px) and (min-width:761px){.topbar{height:68px}.shell{height:calc(100% - 68px)}.workspace{padding:20px}.chat-head{padding:16px 24px}.messages{padding-top:24px;padding-bottom:20px}.compose-area{padding-top:8px;padding-bottom:14px}}
+@media(max-width:1000px){.topbar{padding:0 20px}.top-status{gap:12px}.account-state{display:none}.shell{grid-template-columns:230px minmax(0,1fr)}.sidebar{padding:20px 16px}.workspace{padding:16px}.messages{padding:24px}.compose-area{padding:12px 24px}.candidates{grid-template-columns:1fr}}
+@media(max-width:760px){.topbar{height:68px;padding:0 14px;gap:8px}.brand{gap:8px}.brand-mark{width:30px;height:32px;font-size:23px;border-radius:9px}.brand-name{font-size:13px}.brand-subtitle{font-size:8px;letter-spacing:.01em}.mode{font-size:9px;padding:6px 8px;max-width:160px;line-height:1.5;gap:5px}.top-status{gap:0}.mode .status-dot{display:none}.shell{display:block;height:calc(100% - 68px)}.workspace{height:100%;padding:0}.chat{border:0;border-radius:0;box-shadow:none}.chat-head{padding:14px 16px;gap:8px}.chat-heading{gap:8px}.heading-icon{display:none}.chat-head h2{font-size:15px}.chat-head p{font-size:10px}.session{font-size:10px}.mobile-toggle{display:grid;place-items:center;min-width:44px;min-height:44px;margin-left:-8px}.sidebar{position:fixed;z-index:20;top:68px;left:0;bottom:0;width:min(300px,86vw);background:var(--bg);padding:24px;visibility:hidden;transform:translateX(-100%);transition:transform var(--motion),visibility var(--motion)}body.sidebar-open .sidebar{visibility:visible;transform:translateX(0)}body.sidebar-open .sidebar-shade{display:block;position:fixed;z-index:19;inset:68px 0 0;background:#153f3540;border:0;width:100%}.messages{padding:24px 16px}.message{gap:9px;margin-bottom:28px}.message.user{max-width:88%}.message-avatar{width:24px;height:24px;font-size:19px}.bubble,.user .bubble{font-size:17px}.candidates{grid-template-columns:1fr}.candidate{min-height:44px}.hours-card{padding:16px;gap:12px}.hours-value strong{font-size:34px}.compose-area{padding:10px 14px 12px}.compose{padding:12px}.compose textarea{font-size:16px;min-height:42px}.compose .primary{min-height:44px;min-width:76px}.compose-foot,.keyboard-hint{font-size:9px}.jump{right:16px;bottom:190px}.sources{padding:16px}summary{min-height:28px}}
+.welcome-login{display:none}@media(max-width:760px){.welcome-login{display:inline-flex;align-self:flex-start;margin-top:16px}}
+/* Accessible utilities shared by the compact and desktop workspace. */
+textarea::placeholder{color:var(--muted)}
+.mobile-toggle{border:0;border-radius:var(--r-sm);background:transparent;color:var(--primary)}
+.mobile-toggle:hover{background:var(--soft)}
+@media(max-width:760px){.guide summary,.sources summary,.diagnostics summary{min-height:44px}}
+.mobile-toggle{border:0;border-radius:var(--r-sm);background:transparent;color:var(--muted)}
+.mobile-toggle:hover{background:var(--soft)}
+textarea::placeholder{color:var(--muted)}
+@media(max-width:760px){.guide summary,.sources summary,.diagnostics summary{min-height:44px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.empty{min-height:100%;display:flex;flex-direction:column;justify-content:center;max-width:680px;margin:auto;padding:20px 0}
+.welcome-sign{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:10px;letter-spacing:.18em;font-weight:600;margin-bottom:20px}
+.welcome-sign .brand-mark{width:46px;height:46px;font-size:32px;border-radius:14px}
+.empty h3{font-size:clamp(23px,2vw,31px);line-height:1.5;font-weight:600;letter-spacing:-.04em;margin:0 0 12px}
+.welcome-copy{font-size:13px;line-height:1.9;color:var(--muted);margin:0}
+.examples{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.example{display:flex;align-items:center;gap:12px;min-width:0;padding:16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);text-align:left}
+.example:first-child{grid-column:1/-1}
+.example:hover:not(:disabled){border-color:var(--primary);background:var(--bg)}
+.example:disabled{opacity:.7}
+.example>svg:first-child{color:var(--primary)}
+.example-text{flex:1;font-size:12px;line-height:1.6}
+.example-text small{display:block;font-size:10px;color:var(--muted);margin-top:3px}
+.example>.arrow{width:15px;color:var(--subtle)}
+.welcome-foot{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted);margin:16px 0 0}
+.welcome-foot svg{width:14px;height:14px}
+@media(max-height:820px) and (min-width:761px){
+.empty h3{font-size:26px}
+.welcome-sign{margin-bottom:16px}
+.examples{margin-top:20px}
+.example{padding:12px 16px}
+}
+@media(max-width:1000px){
+.examples{grid-template-columns:1fr}
+.example:first-child{grid-column:auto}
+.example-text small{display:none}
+}
+@media(max-width:760px){
+.empty{padding:12px 0}
+.empty h3{font-size:22px}
+.welcome-copy{font-size:12px}
+.welcome-sign{margin-bottom:16px}
+.welcome-sign .brand-mark{width:36px;height:38px;font-size:26px}
+.example{min-height:48px;padding:12px}
+.examples{gap:8px;margin-top:20px}
+.welcome-foot{font-size:9px;align-items:flex-start}
+}
+.source-entry .card-title{font-size:20px;line-height:1.45}
+@media(max-width:760px){
+  .source-entry .card-title{font-size:18px}
+  .source-excerpt{font-size:16px}
+}
+</style></head><body>
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-8 8H4l-1 2v-10a8.5 8.5 0 0 1 17 0Z"/><path d="M8 10h8M8 14h5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v15"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 4-5 8-8 9-3-1-8-5-8-9V6Z"/><path d="m8 12 3 3 5-6"/></symbol>
+</defs></svg>
+<header class="topbar"><div class="brand"><div class="brand-mark" aria-hidden="true">J</div><div><div class="brand-name">JINBI <span>/</span> 课时助手</div><div class="brand-subtitle">AI-Powered Lesson Management</div></div></div><div class="top-status"><span class="mode" id="mode-label"><i class="status-dot" aria-hidden="true"></i>虚构数据 · 确定性离线演示</span><span class="account-state"><svg aria-hidden="true"><use href="#i-user"/></svg><span id="account-state">未登录</span></span></div></header>
+<div class="shell"><button class="sidebar-shade" id="sidebar-shade" aria-label="关闭导航" type="button" tabindex="-1"></button>
+<aside class="sidebar" id="sidebar" aria-label="演示工作台">
+<div id="login-panel"><div class="eyebrow">JINBI WORKSPACE</div><h1>进入课时工作台</h1><p>使用虚构管理员身份，开始一次安全的教务问答。</p><form id="login" class="login"><label for="username">演示账号</label><input id="username" value="fictional-demo" autocomplete="username" required maxlength="100"><label for="password">密码</label><input id="password" type="password" autocomplete="current-password" required><button class="primary" type="submit">登录演示<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></form><p id="login-state" class="state" role="status">请先登录演示账号</p><div class="credentials"><p>账号 <code>fictional-demo</code><br>密码 <code>fictional-demo-only</code><br>仅适用于此隔离演示环境。</p></div></div>
+<div id="workbench" hidden><div class="eyebrow">WORKSPACE / 工作台</div><button id="reset" class="nav-button new-chat" type="button"><svg aria-hidden="true"><use href="#i-plus"/></svg>新建会话</button><nav aria-label="工作台导航"><button id="chat-nav" class="nav-button active-nav" type="button" aria-current="page"><svg aria-hidden="true"><use href="#i-chat"/></svg>AI 课时助手</button></nav><div class="nav-caption">演示支持</div><details class="guide"><summary><svg aria-hidden="true"><use href="#i-book"/></svg>演示操作指引</summary><ol><li>查询虚构小明的剩余课时。</li><li>选择同名学生，再输入科目。</li><li>询问请假或补课规定，查看可用来源。</li><li>尝试增加课时，观察服务端拒绝。</li></ol><p>规则未启用或未批准时，助手会提示找不到相关规定。</p></details><div class="identity"><span class="identity-avatar" aria-hidden="true">管</span><div><strong id="identity-name">演示管理员</strong><small>当前演示身份 · 只读问答</small></div></div></div>
+<div class="safety"><div class="safety-title"><svg aria-hidden="true"><use href="#i-shield"/></svg>隔离演示 · 安全只读</div><p>仅使用虚构学生数据。<br>助手不支持修改课时及业务数据。</p><p id="mode-note" class="mode-note">回答来自离线演示流程，并非真实大模型。</p></div>
+</aside>
+<main class="workspace"><section class="chat" aria-label="AI 课时助手"><div class="chat-head"><div class="chat-heading"><button class="mobile-toggle" id="sidebar-toggle" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="打开工作台导航"><svg aria-hidden="true"><use href="#i-menu"/></svg></button><div class="heading-icon"><svg aria-hidden="true"><use href="#i-chat"/></svg></div><div><h2>AI 课时助手</h2><p>自然语言查询 · 教学规则检索 · 安全只读</p></div></div><span class="session"><i class="status-dot" aria-hidden="true"></i><span id="session-state" role="status">等待登录</span></span></div><div id="messages" class="messages" role="log" aria-label="会话消息" aria-live="polite" aria-relevant="additions text"></div><button id="jump" class="jump" type="button" hidden>查看最新消息 ↓</button><div class="compose-area"><form id="compose" class="compose"><textarea id="query" rows="1" maxlength="200" aria-label="输入消息" aria-describedby="input-hint" required disabled></textarea><div class="compose-bottom"><span class="keyboard-hint" id="input-hint">Enter 发送 · Shift + Enter 换行</span><button class="primary" id="send" type="submit" disabled><span id="send-label">发送</span><svg aria-hidden="true"><use href="#i-send"/></svg></button></div></form><div class="compose-foot"><span>请勿输入真实学生信息</span><span id="char-count">0 / 200</span></div></div></section></main></div>
+<template id="welcome-template"><div class="empty"><div class="welcome-sign"><div class="brand-mark" aria-hidden="true">J</div>YOUR LESSON WORKSPACE</div><h3>你好，我是 Jinbi AI 课时助手</h3><p class="welcome-copy">可以帮你查询学生剩余课时、理解教学规则，<br>并在只读权限下完成多轮交互。</p><div class="examples"><button class="example" data-query="查询虚构小明的剩余课时" type="button"><svg aria-hidden="true"><use href="#i-user"/></svg><span class="example-text">查询虚构小明的剩余课时<small>确认学生身份后，继续补充查询科目</small></span><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="example" data-query="补课有什么规定？" type="button"><svg aria-hidden="true"><use href="#i-book"/></svg><span class="example-text">补课有什么规定？<small>查阅已批准的教学规则</small></span><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="example" data-query="请假有什么规定？" type="button"><svg aria-hidden="true"><use href="#i-book"/></svg><span class="example-text">请假有什么规定？<small>了解请假规则与适用范围</small></span><svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button></div><p class="welcome-foot"><svg aria-hidden="true"><use href="#i-shield"/></svg>以上示例均使用虚构演示数据 · 登录后点击开始</p></div></template>
+<script>
+'use strict';
+let token='',conversationId=null,busy=false,activeCandidates=[],followLatest=true;
+const candidateDetails=new Map();
+const $=id=>document.getElementById(id),messages=$('messages');
+function el(tag,text,cls){const node=document.createElement(tag);if(text!==undefined)node.textContent=String(text);if(cls)node.className=cls;return node;}
+function scrollLatest(force=false){if(force||followLatest){messages.scrollTop=messages.scrollHeight;$('jump').hidden=true;}else{$('jump').hidden=false;}}
+messages.addEventListener('scroll',()=>{followLatest=messages.scrollHeight-messages.scrollTop-messages.clientHeight<80;if(followLatest)$('jump').hidden=true;});
+$('jump').addEventListener('click',()=>{followLatest=true;scrollLatest(true);});
+function setSidebar(open){document.body.classList.toggle('sidebar-open',open);$('sidebar-toggle').setAttribute('aria-expanded',String(open));document.querySelector('main').inert=open&&innerWidth<=760;}
+$('sidebar-toggle').addEventListener('click',()=>{const open=!document.body.classList.contains('sidebar-open');setSidebar(open);if(open)(token?$('reset'):$('password')).focus();});
+$('sidebar-shade').addEventListener('click',()=>{setSidebar(false);$('sidebar-toggle').focus();});
+document.addEventListener('keydown',event=>{
+  if(!document.body.classList.contains('sidebar-open'))return;
+  if(event.key==='Escape'){setSidebar(false);$('sidebar-toggle').focus();}
+  if(event.key==='Tab'&&innerWidth<=760){const targets=[...$('sidebar').querySelectorAll('button:not(:disabled),input:not(:disabled),summary')].filter(node=>node.getClientRects().length),first=targets[0],last=targets.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}
+});
+window.addEventListener('resize',()=>{if(innerWidth>760)setSidebar(false);});
+// The factory replaces exact offline strings for mock/prepared online pages.
+// Configuration is never evidence that a request reached a model.
+const offline=document.documentElement.dataset.demoMode==='offline_deterministic';
+if(!offline)$('mode-note').textContent=$('mode-label').textContent.includes('模拟模型测试')?'当前为模拟模型测试，不代表真实模型调用。':'使用受限的虚构数据；模型连接状态未验证。';
+function welcome(){
+  messages.replaceChildren($('welcome-template').content.cloneNode(true));
+  if(!token){const login=el('button','登录演示工作台','primary welcome-login');login.type='button';login.addEventListener('click',()=>{setSidebar(true);$('password').focus();});messages.querySelector('.welcome-copy').after(login);}
+  else messages.querySelector('.welcome-foot').lastChild.textContent='以上示例均使用虚构演示数据 · 点击开始会话';
+  messages.querySelectorAll('.example').forEach(button=>button.addEventListener('click',()=>{if(!busy&&token){$('query').value=button.dataset.query;resizeInput();send(button.dataset.query,undefined,true);}}));
+  messages.scrollTop=0;followLatest=true;$('jump').hidden=true;syncControls();
+}
+function syncControls(){
+  $('query').disabled=!token;$('send').disabled=busy||!token||!$('query').value.trim();$('reset').disabled=busy;$('send-label').textContent=busy?'处理中':'发送';$('compose').setAttribute('aria-busy',String(busy));
+  messages.querySelectorAll('.example').forEach(button=>button.disabled=busy||!token);activeCandidates.forEach(button=>button.disabled=busy||!token);
+}
+function resizeInput(){const input=$('query');input.style.height='auto';input.style.height=Math.min(120,Math.max(42,input.scrollHeight))+'px';$('char-count').textContent=input.value.length+' / 200';syncControls();}
+function authView(){if(!token)candidateDetails.clear();$('login-panel').hidden=!!token;$('workbench').hidden=!token;$('account-state').textContent=token?'演示管理员已登录':'未登录';$('query').placeholder=token?'输入问题，或继续补充学生、科目信息…':'请先从工作台登录演示账号';$('session-state').textContent=token?'新会话':'等待登录';syncControls();}
+function message(role,text){
+  messages.querySelector('.empty')?.remove();const box=el('article',undefined,'message '+role),content=el('div',undefined,'message-content');
+  if(role!=='user'){const avatar=el('div','J','message-avatar');avatar.setAttribute('aria-hidden','true');box.append(avatar);}content.append(el('div',role==='user'?'你':'Jinbi · 课时助手','role'));if(text!==undefined)content.append(el('div',text,'bubble'));box.append(content);messages.append(box);scrollLatest(role==='user');return content;
+}
+function callout(box,title,text){const card=el('div',undefined,'structured callout');card.append(el('h3',title,'card-title'));if(text)card.append(el('div',text,'bubble'));box.append(card);return card;}
+async function api(path,body,auth=false){
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),45000);
+  try{
+    const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json',...(auth?{'Authorization':'Bearer '+token}:{})},body:JSON.stringify(body),cache:'no-store',signal:controller.signal});
+    if(response.status===401&&auth){token='';conversationId=null;activeCandidates.forEach(button=>button.disabled=true);activeCandidates=[];authView();$('login-state').textContent='登录已失效，请重新登录。';setSidebar(true);$('password').focus();}
+    let data;try{data=await response.json();}catch{throw new Error('服务响应无法读取，请重试。');}
+    if(!response.ok){const error=new Error(typeof data?.detail==='string'?data.detail:'请求失败（'+response.status+'），请检查输入后重试。');error.httpStatus=response.status;throw error;}
+    if(!data||typeof data!=='object'||Array.isArray(data))throw new Error('服务响应格式异常，请重试。');return data;
+  }catch(error){if(error.name==='AbortError')throw new Error('等待响应超时，请确认服务状态后重试。');if(error instanceof TypeError)throw new Error('无法连接演示服务，请检查本地服务是否运行。');throw error;}finally{clearTimeout(timer);}
+}
+$('login').addEventListener('submit',async event=>{
+  event.preventDefault();const button=event.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;button.textContent='正在登录…';token='';conversationId=null;activeCandidates=[];authView();
+  try{const data=await api('/auth/admin-login',{username:$('username').value,password:$('password').value});if(typeof data.token!=='string'||!data.token)throw new Error('登录响应无效，请重试。');token=data.token;$('identity-name').textContent=$('username').value;$('password').value='';$('login-state').textContent='已登录演示账号';$('login-state').className='state';authView();welcome();setSidebar(false);$('query').focus();}catch(error){$('login-state').textContent=error.message;$('login-state').className='state error';}finally{button.disabled=false;button.textContent='登录演示';}
+});
+$('reset').addEventListener('click',()=>{if(busy||!token)return;conversationId=null;activeCandidates=[];candidateDetails.clear();$('query').value='';$('session-state').textContent='新会话';welcome();resizeInput();setSidebar(false);$('query').focus();});
+$('chat-nav').addEventListener('click',()=>{setSidebar(false);$('query').focus();});
+function render(data){
+  const candidates=Array.isArray(data.candidates)?data.candidates:[],citations=Array.isArray(data.citations)?data.citations:[];
+  const answer=typeof data.answer==='string'?data.answer:'未收到回答，请重新提问。';
+  // Exact server semantics only: no client permission decision or text field extraction.
+  const refusal=data.status==='clarification'&&answer==='教务助手不支持修改课时或其他业务数据，请前往人工操作页面核对并确认。';
+  const subjectQuestion=data.status==='clarification'&&answer==='请明确需要查询的科目；如需全部科目请明确说明。';
+  const box=message('assistant',refusal?undefined:answer);
+  if(refusal){candidateDetails.clear();callout(box,'已拦截数据修改请求',answer);}
+  if(subjectQuestion)callout(box,'请问需要查询哪个科目的剩余课时？','请在下方输入科目；如需全部科目，请明确说明。');
+  if(data.status==='degraded')callout(box,'当前服务降级','暂时无法完成该请求，请稍后重试。');
+  if(data.status==='error')callout(box,'暂时无法完成查询','请核对问题后重试，或新建会话。');
+  for(const item of Array.isArray(data.data)?data.data:[]){
+    if(item.tool!=='get_student_hours'||!Array.isArray(item.result?.subjects))continue;
+    for(const subject of item.result.subjects){
+      if(typeof subject.subjectName!=='string'||typeof subject.remainingHours!=='number'||!Number.isFinite(subject.remainingHours))continue;
+      const card=el('section',undefined,'structured hours-card'),info=el('div'),value=el('div',undefined,'hours-value');
+      info.append(el('div','课时查询结果 · SQLite 只读查询','card-label'),el('h3',subject.subjectName,'card-title'));
+      // Match the server's result ID to its candidates in this session only.
+      // A direct query with no candidate response must not invent a student name.
+      const student=candidateDetails.get(item.result.studentId);
+      if(student)info.append(el('div',[student.studentName,student.studentNo].filter(Boolean).join(' · '),'hours-detail'));
+      const totals=[];if(typeof subject.totalHours==='number')totals.push('总课时 '+subject.totalHours);if(typeof subject.deductedHours==='number')totals.push('已扣 '+subject.deductedHours);if(totals.length)info.append(el('div',totals.join(' · '),'hours-detail'));
+      value.append(el('strong',subject.remainingHours),el('span','节'),el('small','剩余课时'));card.append(info,value);box.append(card);
+    }
+  }
+  if(citations.length){
+    const sources=el('details',undefined,'sources');
+    sources.append(el('summary','查看依据'));
+    for(const citation of citations){
+      const source=el('div',undefined,'source-entry');
+      source.append(el('h3',citation.display_title||citation.document_title||'规则来源','card-title'),
+        el('p',citation.display_text??citation.rule_text??citation.supporting_excerpt??'','source-excerpt'));
+      sources.append(source);
+    }
+    box.append(sources);
+  }
+  if(candidates.length){
+    box.append(el('div','确认学生身份 · 请选择本次查询对象','retrieval-label'));const grid=el('div',undefined,'candidates');
+    candidates.forEach((candidate,index)=>{
+      if(!Number.isInteger(candidate.studentId)||candidate.studentId<=0)return;
+      candidateDetails.set(candidate.studentId,candidate);
+      const button=el('button',undefined,'candidate');button.type='button';button.setAttribute('aria-pressed','false');button.append(el('strong',candidate.studentName||'待确认学生'));const attributes=[candidate.classType,candidate.grade,candidate.studentNo].filter(Boolean);if(attributes.length)button.append(el('small',attributes.join(' · ')));if(candidate.phone)button.append(el('small','联系方式 '+candidate.phone));const action=el('span','选择此学生 →','candidate-action');button.append(action);
+      button.addEventListener('click',async()=>{if(busy||!token)return;button.setAttribute('aria-pressed','true');action.textContent='正在确认…';const success=await send('选择第'+(index+1)+'位',candidate.studentId);button.setAttribute('aria-pressed',String(success));action.textContent=success?'已提交确认':'选择此学生 →';});grid.append(button);activeCandidates.push(button);
+    });box.append(grid);
+  }
+  const trace=Array.isArray(data.trace)?data.trace.filter(item=>item&&typeof item.tool==='string'):[];
+  if(trace.length){const details=el('details',undefined,'diagnostics');details.append(el('summary','查看本次工具执行详情'));const names={get_student_hours:'课时只读查询',get_lesson_records:'课时流水查询',search_demo_academic_rules:'本地规则检索'};trace.forEach(item=>details.append(el('div',(names[item.tool]||item.tool)+' · '+(item.status==='ok'?'完成':item.status||'状态未提供')+(typeof item.durationMs==='number'?' · '+item.durationMs+' ms':''))));box.append(details);}
+  $('session-state').textContent=candidates.length?'待确认学生':subjectQuestion?'待补充科目':data.status==='complete'||data.status==='ok'?'查询完成':'会话进行中';scrollLatest();
+}
+async function send(query,selected,fromInput=false){
+  const submittedDraft=$('query').value;
+  if(busy||!token)return false;busy=true;syncControls();message('user',query);const pending=message('assistant'),loading=el('div',undefined,'pending');loading.append(el('i',undefined,'spinner'),el('span','正在处理你的问题…'));pending.append(loading);$('session-state').textContent='正在处理';scrollLatest(true);
+  try{
+    const payload={query};if(conversationId!==null)payload.conversationId=conversationId;if(selected!==undefined)payload.selectedStudentId=selected;
+    const data=await api('/admin/ai/chat',payload,true);
+    if(data.status==='error'){
+      // A rejected first turn need not create a conversation. Never adopt an
+      // ID from an error response or confuse a model failure with a session.
+      if(data.recovery==='new_session')conversationId=null;
+      const error=new Error(typeof data.answer==='string'?data.answer:'查询失败，请重试。');error.clearCandidates=true;error.operatorRequired=data.recovery==='operator_required';throw error;
+    }
+    if(!Number.isInteger(data.conversationId)||data.conversationId<=0)throw new Error('服务响应缺少有效会话，请重试或新建会话。');conversationId=data.conversationId;
+    activeCandidates.forEach(button=>{button.disabled=true;button.querySelector('.candidate-action').textContent='已结束本轮选择';});activeCandidates=[];pending.parentElement.remove();render(data);if(fromInput&&$('query').value===submittedDraft)$('query').value='';return true;
+  }catch(error){if(error.httpStatus===404||error.clearCandidates){activeCandidates.forEach(button=>button.disabled=true);activeCandidates=[];candidateDetails.clear();}if(error.httpStatus===404)conversationId=null;pending.parentElement.remove();const box=message('assistant');callout(box,'请求未完成',error.message);box.append(el('div',error.operatorRequired?'输入已保留；需由演示负责人核对请求预算后再继续。':'输入已保留。恢复连接后可重新发送；服务状态不确定时可新建会话。','diagnostics'));$('session-state').textContent=token?(error.operatorRequired?'等待负责人处理':'等待重试'):'等待登录';scrollLatest();return false;}
+  finally{busy=false;resizeInput();if(token&&!document.body.classList.contains('sidebar-open'))$('query').focus();}
+}
+$('query').addEventListener('input',resizeInput);
+$('query').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing&&event.keyCode!==229){event.preventDefault();if(!busy&&token)$('compose').requestSubmit();}});
+$('compose').addEventListener('submit',event=>{event.preventDefault();const query=$('query').value.trim();if(query)send(query,undefined,true);});
+welcome();authView();resizeInput();
+</script></body></html>

@@ -1,0 +1,62 @@
+# Local secrets and machine-specific state
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.idea/
+.vscode/
+desktop.ini
+
+# Databases, logs, diagnostics, and historical experiment material
+*.db
+*.sqlite
+*.sqlite3
+*.log
+debug.log
+output/
+evidence/
+experiments/
+test_dependencies/
+b*-*.txt
+b*_*.txt
+b*-*.json
+b*_*.json
+*_diagnostic_output.txt
+*_full_output.txt
+
+# Production seed includes hard-coded credentials and personal-looking data.
+# Keep source locally until replaced with sanitized, configurable demo fixtures.
+app/scripts/seed_data.py
+seed.py
+db_readonly_check.py
+app/scripts/clean_test_student.py
+*.b*-baseline
+*.a*-baseline
+b224_verify_evidence.py*
+b225-negative-*/
+docs/ai/
+docs/security/
+docs/UI_UPGRADE_REPORT.md
+AI助手配置说明.md
+RAG开发说明.md
+api_contract_for_codex.md
+测试环境说明.md
+tests/test_few_shot*.py
+tests/test_evidence_isolation.py
+tests/test_multiturn_parameters_r3.py
+tests/test_online_precise_failure.py
+tests/test_d4_r4_budget.py
+tests/deepseek_sandbox_probe.py
+.release-smoke/
+
+# Generated / imported user data
+*.xlsx
+*.xls
+*.csv
+uploads/

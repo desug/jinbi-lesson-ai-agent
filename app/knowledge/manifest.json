@@ -1,0 +1,5 @@
+[
+ {"id":"LEAVE","file":"leave.md","title":"请假申请与登记规则","version":"1.0","effectiveDate":"2026-10-22","scope":"项目展示","demo":true},
+ {"id":"MAKEUP","file":"makeup.md","title":"补课申请与安排规则","version":"1.0","effectiveDate":"2026-10-22","scope":"项目展示","demo":true},
+ {"id":"HOURS","file":"hours.md","title":"课时计量与人工调整说明","version":"1.0","effectiveDate":"2026-10-22","scope":"项目展示","demo":true}
+]
